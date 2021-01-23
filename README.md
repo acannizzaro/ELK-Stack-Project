@@ -225,3 +225,5 @@ After this, the commands below run the playbook:
 To verify success, wait five minutes to give ELK time to start up. 
 
 Then in your browser, navigate to: `http://[ELK public IP]:5601/app/kibana`. This is the address of Kibana. If the installation succeeded, this should bring you to the kibana home page.
+To verify Filebeat is running, click "Add Log Data", scroll down to "System Logs", then scroll to the bottom and click "Check Data". If everything was done correctly Filebeat should be sending data from the Webservers to your ELK server.
+Metricbeat can also be verified by clicking "Add Metric Data", scolling to "Docker", then scrolling again to the bottom to "Check Data".
