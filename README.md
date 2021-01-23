@@ -200,7 +200,7 @@ Next, you must edit the `hosts` file to specify which VMs to run each playbook o
 
 ```bash
 $ cd /etc/ansible
-$ cat > hosts <<EOF
+$ nano hosts 
 [webservers]
 10.1.0.5 ansible_python_interpreter=/usr/bin/python3
 10.1.0.6 ansible_python_interpreter=/usr/bin/python3
