@@ -16,7 +16,7 @@ This repository includes code defining the infrastructure below.
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the "D*mn Vulnerable Web Application"
 
-Load balancing ensures that the application will be highly **available**, in addition to restricting **inbound access** to the network. The load balancer ensures that work to process incoming traffic will be shared by both vulnerable web servers. Access controls will ensure that only authorized users — namely, ourselves — will be able to connect in the first place.
+Load balancing ensures that the application will be highly **available**, in addition to restricting **inbound access** to the network. The load balancer ensures that work to process incoming traffic will be shared by all vulnerable web servers. Access controls will ensure that only authorized users — namely, ourselves — will be able to connect in the first place.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the **file systems of the VMs on the network**, as well as watch **system metrics**, such as CPU usage; attempted SSH logins; `sudo` escalation failures; etc.
 
@@ -55,7 +55,7 @@ The machines on the internal network are _not_ exposed to the public Internet.
 The **jump box** machine and **ELK Stack** machine can accept connections from the Internet. Access to these machines is only allowed from the IP address `73.66.116.101`
 - **Note**: This will change, as it is based off of the current local machine IP.
 
-Machines _within_ the network can only be accessed by **each other**. The DVWA 1, DVWA 2, and DVWA 3 VMs send traffic to the ELK server.
+Machines _within_ the network can only be accessed by **each other**. The DVWA 1, DVWA 2, and DVWA 3 VMs can receive HTTP traffic on port 80 from the **load balancer**, they then send telemetry data to the ELK server.
 
 A summary of the access policies in place can be found in the table below.
 
