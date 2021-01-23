@@ -12,7 +12,7 @@ This document contains the following details:
 ### Description of the Topology
 This repository includes code defining the infrastructure below. 
 
-![](Images/ELK Stack.png)
+![](/acannizzaro/ELK-Stack-Project/blob/main/Images/ELK%20Stack.png)
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the "D*mn Vulnerable Web Application"
 
@@ -39,7 +39,7 @@ The ELK VM exposes an Elastic Stack instance. **Docker** is used to download and
 
 Rather than configure ELK manually, we opted to develop a reusable Ansible Playbook to accomplish the task. This playbook is duplicated below.
 
-![](playbooks/elk-playbook.yml) 
+![](/acannizzaro/ELK-Stack-Project/blob/main/playbooks/elk-playbook.yml) 
 
 To use this playbook, one must log into the Jump Box and ssh into the ansible container, and configure the hosts file for ansible to properly execute playbooks on the servers we want.
 run `nano /etc/ansible/hosts` and add a section for elkservers
@@ -82,7 +82,7 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![](Images/docker_ps.png)
+![](/acannizzaro/ELK-Stack-Project/blob/main/Images/docker_ps.png)
 
 The playbook is duplicated below.
 ```yaml
@@ -140,7 +140,7 @@ These Beats allow us to collect the following information from each machine:
 
 The playbook below installs Metricbeat on the target hosts. The playbook for installing Filebeat is not included, but looks essentially identical — simply replace `metricbeat` with `filebeat`, and it will work as expected.
 
-![](Playbooks/metricbeat.yml)
+![](/acannizzaro/ELK-Stack-Project/blob/main/playbooks/metricbeat-playbook.yml)
 
 
 ### Using the Playbooks
