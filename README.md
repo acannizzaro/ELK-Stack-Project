@@ -3,10 +3,11 @@
 This document contains the following details:
 - Description of the Topology
 - ELK Configuration
-  - Beats in Use
-  - Machines Being Monitored
-- How to Use the Ansible Build
 - Access Policies
+- Beats in Use
+- Machines Being Monitored
+- How to Use the Ansible Build
+
 
 ### Description of the Topology
 This repository includes code defining the infrastructure below. 
@@ -84,8 +85,46 @@ The following screenshot displays the result of running `docker ps` after succes
 ![](Images/docker_ps.png)
 
 The playbook is duplicated below.
-
-
+```yaml
+---  
+  - name: ELK Server Setup                                                            
+    hosts: elkservers                                     
+    become: true                                                                  
+    tasks:                                                                          
+      - name: Install docker.io                                                       
+        apt:                                                                            
+          name: docker.io                                                               
+          update_cache: yes                                                             
+          state: present                                                            
+      - name: Install python3-pip                                                     
+        apt:                                                                            
+          name: python3-pip                                                             
+          state: present                                                            
+      - name: Install docker with pip                                                 
+        pip:                                                                            
+           name: docker                                                                  
+           state: present                                                             
+      - name: Use more memory                                                         
+        sysctl:                                                                         
+          name: vm.max_map_count                                                        
+          value: "262144"                                                               
+          state: present                                                                
+          reload: yes                                           
+      - name: Pull default Docker image                                               
+        docker_container:                                                               
+          name: elk                                                                     
+          image: sebp/elk:761                                                           
+          state: started                                                                
+          restart_policy: always                                                        
+          ports:                                                                          
+            - 5601:5601                                                                   
+            - 9200:9200                                                                   
+            - 5044:5044                                                             
+      - name: Enable docker service on restart                                        
+        systemd:                                                                        
+          name: docker                                                                  
+          enabled: yes
+```
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the DVWA 1, DVWA 2, and DVWA 3 VMs, at `10.1.0.5`, `10.1.0.6`, and `10.1.0.7` respectively.
@@ -155,11 +194,12 @@ After this, the commands below run the playbook:
 
  ```bash
  $ cd /etc/ansible
- $ ansible-playbook elk_playbook.yml 
+ $ ansible-playbook elk_playbook.yml
+ $ ansible-playbook dvwa_playbook.yml
  $ ansible-playbook filebeat_playbook.yml 
  $ ansible-playbook metricbeat_playbook.yml 
  ```
 
 To verify success, wait five minutes to give ELK time to start up. 
 
-Then, run: `curl http://10.0.0.4:5601`. This is the address of Kibana. If the installation succeeded, this command should print HTML to the console.
+Then in your browser, navigate to: `http://[ELK public IP]:5601/app/kibana`. This is the address of Kibana. If the installation succeeded, this should bring you to the kibana home page.
