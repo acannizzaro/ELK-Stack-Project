@@ -25,13 +25,13 @@ The configuration details of each machine may be found below.
 | Name     |   Function  | IP Address | Operating System |
 |----------|-------------|------------|------------------|
 | Jump Box | Gateway     | 10.1.0.4   | Linux            |
-| DVWA 1   | Web Server  | 10.1.0.5   | Linux            |
-| DVWA 2   | Web Server  | 10.1.0.6   | Linux            |
-| DVWA 3   | Web Server  | 10.1.0.7   | Linux            |
+| Web 1    | Web Server  | 10.1.0.5   | Linux            |
+| Web 2    | Web Server  | 10.1.0.6   | Linux            |
+| Web 3    | Web Server  | 10.1.0.7   | Linux            |
 | ELK      | Monitoring  | 10.0.0.4   | Linux            |
 
 In addition to the above, Azure has provisioned a **load balancer** in front of all Webservers. The load balancer's targets are organized in the following availability zone:
-- **Web Set**: DVWA 1 + DVWA 2 + DVWA 3
+- **Web Set**: Web 1 + Web 2 + Web 3
 
 
 ## ELK Server Configuration
@@ -60,17 +60,16 @@ Machines _within_ the network can only be accessed by **each other**. The DVWA 1
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses 		| Allowed Ports
+| Name     | Publicly Accessible | Allowed IP Addresses 		    | Allowed Ports
 |----------|---------------------|------------------------------|------------------
-| Jump Box | Yes                 | 73.66.116.101       			| 22
+| Jump Box | Yes                 | 73.66.116.101       	    		| 22
 | ELK      | Yes                 | 10.1.0.1-254  & 73.66.116.101| 5601
-| DVWA 1   | No                  | 10.0.0.1-254         		| 22 80
-| DVWA 2   | No                  | 10.0.0.1-254         		| 22 80
-| DVWA 2   | No                  | 10.0.0.1-254         		| 22 80
+| DVWA 1   | No                  | 10.0.0.1-254         		    | 22 80
+| DVWA 2   | No                  | 10.0.0.1-254         	    	| 22 80
+| DVWA 2   | No                  | 10.0.0.1-254         	    	| 22 80
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because it allows us to configure as many machines as we 
-want by simply reconfiguring the hosts file and running the playbook.
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because it allows us to configure as many machines as we want by simply reconfiguring the hosts file and running the playbook.
 
 The playbook implements the following tasks:
 - Install Docker.io
