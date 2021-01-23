@@ -37,9 +37,8 @@ In addition to the above, Azure has provisioned a **load balancer** in front of 
 ## ELK Server Configuration
 The ELK VM exposes an Elastic Stack instance. **Docker** is used to download and manage an ELK container.
 
-Rather than configure ELK manually, we opted to develop a reusable Ansible Playbook to accomplish the task. This playbook is duplicated below.
+Rather than configure ELK manually, we opted to develop a reusable Ansible Playbook to accomplish the task.
 
-![ELK Playbook](/playbooks/elk-playbook.yml) 
 
 To use this playbook, one must log into the Jump Box and ssh into the ansible container, and configure the hosts file for ansible to properly execute playbooks on the servers we want.
 run `nano /etc/ansible/hosts` and add a section for elkservers
@@ -84,6 +83,8 @@ The following screenshot displays the result of running `docker ps` after succes
 ![Docker PS Output](/Images/docker_ps.PNG)
 
 The playbook is duplicated below.
+![ELK Playbook](/playbooks/elk-playbook.yml) 
+
 ```yaml
 ---  
   - name: ELK Server Setup                                                            
@@ -126,7 +127,7 @@ The playbook is duplicated below.
 ```
 
 ### Target Machines & Beats
-This ELK server is configured to monitor the DVWA 1, DVWA 2, and DVWA 3 VMs, at `10.1.0.5`, `10.1.0.6`, and `10.1.0.7` respectively.
+This ELK server is configured to monitor the Web 1, Web 2, and Web 3 VMs, at `10.1.0.5`, `10.1.0.6`, and `10.1.0.7` respectively.
 
 We have installed the following Beats on these machines:
 - Filebeat
@@ -169,11 +170,11 @@ In order to use the playbooks, you will need to have an Ansible control node alr
 
 To get an Ansible Container running on your **jump box** use the following commands:
 ```bash
-$sudo apt install docker.io
-$sudo systemctl start docker
-$sudo docker pull cyberxsecurity/ansible:latest
-$sudo docker run -ti cyberxsecurity/ansible:latest bash
-$exit
+$ sudo apt install docker.io
+$ sudo systemctl start docker
+$ sudo docker pull cyberxsecurity/ansible:latest
+$ sudo docker run -ti cyberxsecurity/ansible:latest bash
+$ exit
 ```
 
 
