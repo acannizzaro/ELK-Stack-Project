@@ -44,9 +44,10 @@ To use this playbook, one must log into the Jump Box and ssh into the ansible co
 run `nano /etc/ansible/hosts` and add a section for elkservers
 
 [elkservers]
-<private server ip> ansible_python_interpreter=/usr/bin/python3
+[private server ip] ansible_python_interpreter=/usr/bin/python3
 
-then issue: `ansible-playbook elk-playbook.yml` . This runs the `elk-playbook.yml` playbook on the `elkservers` hosts.
+then issue: `ansible-playbook elk-playbook.yml` . 
+This runs the `elk-playbook.yml` playbook on the `elkservers` hosts.
 
 ### Access Policies
 The machines on the internal network are _not_ exposed to the public Internet. 
