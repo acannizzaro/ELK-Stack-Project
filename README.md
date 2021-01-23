@@ -174,7 +174,9 @@ $ sudo apt install docker.io
 $ sudo systemctl start docker
 $ sudo docker pull cyberxsecurity/ansible:latest
 $ sudo docker run -ti cyberxsecurity/ansible:latest bash
-$ exit
+$ sudo docker container list -a
+$ sudo docker container start container_name
+$ sudo docker container attach container_name
 ```
 
 
