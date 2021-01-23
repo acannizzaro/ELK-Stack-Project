@@ -42,11 +42,11 @@ Rather than configure ELK manually, we opted to develop a reusable Ansible Playb
 
 To use this playbook, one must log into the Jump Box and ssh into the ansible container, and configure the hosts file for ansible to properly execute playbooks on the servers we want.
 run `nano /etc/ansible/hosts` and add a section for elkservers
-
+```
 [elkservers]
 
 < private server ip > ansible_python_interpreter=/usr/bin/python3
-
+```
 then issue: `ansible-playbook elk-playbook.yml` . 
 This runs the `elk-playbook.yml` playbook on the `elkservers` hosts.
 
