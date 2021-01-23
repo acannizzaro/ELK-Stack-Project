@@ -81,7 +81,7 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![Docker PS Output](/Images/docker_ps.png)
+![Docker PS Output](/Images/docker_ps.PNG)
 
 The playbook is duplicated below.
 ```yaml
@@ -141,6 +141,28 @@ The playbook below installs Metricbeat on the target hosts. The playbook for ins
 
 ![Metricbeat Playbook](/playbooks/metricbeat-playbook.yml)
 
+```yaml
+---
+  - name: Installing and Launch Metricbeat
+    hosts: webservers
+    become: yes
+    tasks:
+## Check for version updates before running
+    - name: Download metricbeat .deb file
+      command: curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.6.1-amd64.deb
+    - name: Install metricbeat .deb
+      command: dpkg -i metricbeat-7.6.1-amd64.deb
+    - name: Drop in metricbeat.yml
+      copy:
+        src: /etc/ansible/files/metricbeat-config.yml
+        dest: /etc/metricbeat/metricbeat.yml
+    - name: Enable and Configure Docker Module
+      command: metricbeat modules enable docker
+    - name: Setup metricbeat
+      command: metricbeat setup
+    - name: Start metricbeat service
+      command: service metricbeat start
+```
 
 ### Using the Playbooks
 In order to use the playbooks, you will need to have an Ansible control node already configured. We use the **jump box** for this purpose.
